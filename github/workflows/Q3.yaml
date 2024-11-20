@@ -1,0 +1,25 @@
+name: Workflow Q3
+
+on:
+  push:
+    paths:
+      - 'Q3.java'
+
+jobs:
+  create-file:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Create Q3_archive_java.txt
+        run: |
+          echo "Nom: Renaut" > Q3_archive_java.txt
+          echo "Prénom: Thibaut" >> Q3_archive_java.txt
+          cat Q3.java >> Q3_archive_java.txt
+
+      - name: Push new file
+        run: |
+          git add Q3_archive_java.txt
+          git commit -m "Add Q3_archive_java.txt"
+          git push
