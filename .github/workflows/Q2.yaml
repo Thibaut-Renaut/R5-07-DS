@@ -1,0 +1,26 @@
+name: Workflow Q2
+
+on:
+  push:
+    paths:
+      - 'README.md'  # Déclenche le workflow si README.md est modifié
+
+jobs:
+  create-file:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Create Q2_archive_README.md
+        run: |
+          echo "Nom: Renaut" > Q2_archive_README.md
+          echo "Prénom: Thibaut" >> Q2_archive_README.md
+          echo "Date et Heure: $(date)" >> Q2_archive_README.md
+          cat README.md >> Q2_archive_README.md
+
+      - name: Push new file
+        run: |
+          git add Q2_archive_README.md
+          git commit -m "Add Q2_archive_README.md"
+          git push
