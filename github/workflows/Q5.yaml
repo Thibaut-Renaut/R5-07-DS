@@ -1,0 +1,26 @@
+name: Workflow Q5
+
+on:
+  push:
+    paths:
+      - 'Q5.java'
+
+jobs:
+  create-file:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Create Q5_archive_date.txt
+        run: |
+          DATE=$(date +'%d-%m-%Y')
+          echo "Nom: Renaut" > Q5_archive_${DATE}.txt
+          echo "Prénom: Thibaut" >> Q5_archive_${DATE}.txt
+          cat Q5.java >> Q5_archive_${DATE}.txt
+
+      - name: Push new file
+        run: |
+          git add Q5_archive_${DATE}.txt
+          git commit -m "Add Q5_archive_date.txt"
+          git push
